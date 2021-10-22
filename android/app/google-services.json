@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "205063864127",
+    "project_id": "myca-5746f",
+    "storage_bucket": "myca-5746f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205063864127:android:177a2c424032c719861d8a",
+        "android_client_info": {
+          "package_name": "com.example.accounter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205063864127-a332kk5l92foj0ocspd1tv3nacvf97ir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtZ7Z1j0RlqBt8W-iJkJFEkLEg3Tcpnio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205063864127-a332kk5l92foj0ocspd1tv3nacvf97ir.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
