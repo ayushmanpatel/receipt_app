@@ -12,7 +12,7 @@ import 'package:pdf/widgets.dart';
 class PdfInvoiceApi {
   static Future<File> generate(Invoice invoice) async {
     final pdf = Document();
-    String pdfname = ReceiptInfo().pdfname;
+   
 
     pdf.addPage(MultiPage(
       build: (context) => [
