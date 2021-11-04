@@ -9,10 +9,9 @@ import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 
 class HomePage extends StatefulWidget {
-  final upiid, datetime, refimglink, userId;
+  final upiid, refimglink, userId;
 
-  const HomePage(
-      {Key key, this.upiid, this.datetime, this.refimglink, this.userId})
+  const HomePage({Key key, this.upiid, this.refimglink, this.userId})
       : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
@@ -147,7 +146,6 @@ class _HomePageState extends State<HomePage> {
             refimglink: widget.refimglink,
             userId: user.uid,
             upiid: widget.upiid,
-            datetime: widget.datetime,
           )
         ],
       ),

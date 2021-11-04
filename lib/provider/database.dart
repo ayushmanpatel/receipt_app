@@ -8,18 +8,18 @@ class DatabaseService {
   final CollectionReference koshCollection =
       FirebaseFirestore.instance.collection('kosh');
 
-  Future updateUserData(String _upiRefId, String paytime, String _imageurl,
-      int _docNumber, bool isVerified) async {
+  Future updateUserData(String _upiRefId, String _imageurl, int _docNumber,
+      bool isVerified, String amount) async {
     return await koshCollection
         .doc(uid)
         .collection('userData')
         .doc("Upload_$_docNumber")
         .set({
       'upiRefId': _upiRefId,
-      'paytime': paytime,
       'imageurl': _imageurl,
       'docNumber': _docNumber,
-      'isVerified': isVerified
+      'isVerified': isVerified,
+      'amount': amount,
     });
   }
 

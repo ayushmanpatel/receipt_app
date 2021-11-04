@@ -2,7 +2,7 @@
     package="com.example.accounter">
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <application
-        android:label="accounter"
+        android:label="FeePay"
         android:icon="@mipmap/ic_launcher">
       <meta-data
       android:name="com.google.mlkit.vision.DEPENDENCIES"

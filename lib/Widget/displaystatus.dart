@@ -10,10 +10,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ReceiptStatus extends StatefulWidget {
-  const ReceiptStatus(
-      {Key key, this.upiid, this.datetime, this.refimglink, this.userId})
+  const ReceiptStatus({Key key, this.upiid, this.refimglink, this.userId})
       : super(key: key);
-  final upiid, datetime, refimglink, userId;
+  final upiid, refimglink, userId;
   @override
   _ReceiptStatusState createState() => _ReceiptStatusState();
 }
@@ -56,6 +55,8 @@ class _ReceiptStatusState extends State<ReceiptStatus> {
                         .deleteUserData(data['docNumber']);
                 }
               }
+
+              DateTime now = DateTime.now();
 
               bool isVerified = data['isVerified'];
               bool refresh = false;
@@ -138,7 +139,7 @@ class _ReceiptStatusState extends State<ReceiptStatus> {
                                         "Upi Ref Id : ${data['upiRefId']}",
                                         maxLines: 1,
                                         softWrap: true,
-                                        overflow: TextOverflow.ellipsis,
+                                        overflow: TextOverflow.clip,
                                         style: TextStyle(
                                             fontSize: 14.0,
                                             color: Colors.white),
@@ -147,10 +148,10 @@ class _ReceiptStatusState extends State<ReceiptStatus> {
                                         height: 10.0,
                                       ),
                                       Text(
-                                        "Time : ${data['paytime']}",
+                                        "Date : ${now.day}-${now.month}-${now.year}",
                                         maxLines: 1,
                                         softWrap: true,
-                                        overflow: TextOverflow.ellipsis,
+                                        overflow: TextOverflow.clip,
                                         style: TextStyle(
                                             fontSize: 14.0,
                                             color: Colors.white),
@@ -160,10 +161,10 @@ class _ReceiptStatusState extends State<ReceiptStatus> {
                                       ),
                                       isVerified
                                           ? Text(
-                                              "Paid : ₹ 100000",
+                                              "Paid : ₹ ${data['amount']}",
                                               maxLines: 1,
                                               softWrap: true,
-                                              overflow: TextOverflow.ellipsis,
+                                              overflow: TextOverflow.clip,
                                               style: TextStyle(
                                                   fontSize: 14.0,
                                                   color: Colors.white),
@@ -172,7 +173,7 @@ class _ReceiptStatusState extends State<ReceiptStatus> {
                                               "Paid : ₹ - - - - - -",
                                               maxLines: 1,
                                               softWrap: true,
-                                              overflow: TextOverflow.ellipsis,
+                                              overflow: TextOverflow.clip,
                                               style: TextStyle(
                                                   fontSize: 14.0,
                                                   color: Colors.white),
@@ -234,7 +235,7 @@ class _ReceiptStatusState extends State<ReceiptStatus> {
                                               name: 'Ayushman Patel',
                                               pdfname:
                                                   'Reg-0${data['docNumber']}',
-                                              amount: "100000",
+                                              amount: "${data['amount']}",
                                               paymode: "online",
                                               remarks: "Towards fees",
                                               reference: data["upiRefId"],

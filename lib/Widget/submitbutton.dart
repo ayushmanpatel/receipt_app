@@ -7,10 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SubmitButton extends StatefulWidget {
-  const SubmitButton(
-      {Key key, this.userid, this.upiId, this.timedate, this.refimg})
+  const SubmitButton({Key key, this.userid, this.upiId, this.refimg})
       : super(key: key);
-  final userid, upiId, timedate, refimg;
+  final userid, upiId, refimg;
   @override
   _SubmitButtonState createState() => _SubmitButtonState();
 }
@@ -52,16 +51,38 @@ class _SubmitButtonState extends State<SubmitButton> {
                   .putFile(widget.refimg);
               _downloadurl = await snapshot.ref.getDownloadURL();
             }
+            var docid;
+            var amount;
+
             bool isvalid = await CheckUpiId().checkUpiId(widget.upiId);
+
+            var bankapi = FirebaseFirestore.instance.collection('bankapi');
+            var querySnapShot =
+                await bankapi.where('id', isEqualTo: widget.upiId).get();
+            if (querySnapShot != null) {
+              for (var snapshot in querySnapShot.docs) {
+                docid = snapshot.data();
+                if (docid['debit'] != "") {
+                  amount = docid['debit'].toString();
+                } else if (docid['credit'] != "") {
+                  amount = docid['credit'].toString();
+                } else {
+                  amount = "unable to fetch".toString();
+                }
+              }
+            }
+
             await DatabaseService(uid: widget.userid.uid).updateUserData(
-                widget.upiId, widget.timedate, _downloadurl, docNum, isvalid);
+                widget.upiId, _downloadurl, docNum, isvalid, amount);
+            if (isvalid == true) {
+              await CheckUpiId().updateVerified(widget.upiId);
+            }
 
             await Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                   builder: (context) => HomePage(
                         upiid: widget.upiId,
-                        datetime: widget.timedate,
                         refimglink: _downloadurl,
                         userId: widget.userid,
                       )),

@@ -41,38 +41,12 @@ class _ExtractPageState extends State<ExtractPage> {
   displayText() async {
     RecognisedText recognisedText = await textRecognizer
         .processImage(InputImage.fromFilePath(widget.imported.path));
-    bool isDateTimegot = false;
+    // bool isDateTimegot = false;
     bool isUpiIdgot = false;
     for (TextBlock block in recognisedText.blocks) {
       for (TextLine line in block.lines) {
-        //print(line.text);
         textList.add(line.text);
-        var result = await entityExtractor.extractEntities(line.text);
-        result.forEach((element) {
-          var elementtype = element.entities.toString();
-          if (elementtype == "[DateTimeEntity{type=2}]" ||
-              element.text.contains(RegExp(
-                  r'^(?=\d)(?:(?:31(?!.(?:0?[2469]|11))|(?:30|29)(?!.0?2)|29(?=.0?2.(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))(?:\x20|$))|(?:2[0-8]|1\d|0?[1-9]))([-./])(?:1[012]|0?[1-9])\1(?:1[6-9]|[2-9]\d)?\d\d(?:(?=\x20\d)\x20|$))?(((0?[1-9]|1[012])(:[0-5]\d){0,2}(\x20[AP]M))|([01]\d|2[0-3])(:[0-5]\d){1,2})?$'))) {
-            if (element.text.contains(DateTime.march.toString()) ||
-                element.text.contains(DateTime.january.toString()) ||
-                element.text.contains(DateTime.february.toString()) ||
-                element.text.contains(DateTime.april.toString()) ||
-                element.text.contains(DateTime.may.toString()) ||
-                element.text.contains(DateTime.june.toString()) ||
-                element.text.contains(DateTime.july.toString()) ||
-                element.text.contains(DateTime.august.toString()) ||
-                element.text.contains(DateTime.september.toString()) ||
-                element.text.contains(DateTime.october.toString()) ||
-                element.text.contains(DateTime.november.toString()) ||
-                element.text.contains(DateTime.december.toString())) {
-              timedate = line.text;
-              //print(line.text);
-              isDateTimegot = true;
-            }
-          }
-        });
         for (TextElement word in line.elements) {
-          //print(word.text);
           if (word.text.startsWith("UTR:")) {
             upiId = word.text;
             upiId = upiId.substring(4, upiId.length);
@@ -85,7 +59,7 @@ class _ExtractPageState extends State<ExtractPage> {
         }
       }
     }
-    if (isUpiIdgot && isDateTimegot) {
+    if (isUpiIdgot) {
       setState(() {
         _isloading = true;
       });
@@ -146,7 +120,7 @@ class _ExtractPageState extends State<ExtractPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "UID:001",
+                                  "UID",
                                   style: TextStyle(color: Colors.white),
                                 ),
                               ],
@@ -192,33 +166,6 @@ class _ExtractPageState extends State<ExtractPage> {
                                   SizedBox(
                                     height: 10.0,
                                   ),
-                                  Text("Date and Time"),
-                                  SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  Container(
-                                      height: 32.0,
-                                      width: 190.0,
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 5.0, horizontal: 5.0),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.black,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(4.0),
-                                      ),
-                                      child: _isloading
-                                          ? Text(
-                                              timedate,
-                                              style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold),
-                                            )
-                                          : LinearProgressIndicator(
-                                              minHeight: 20.0,
-                                              backgroundColor: Colors.blue[900],
-                                            )),
                                   SizedBox(
                                     height: 10.0,
                                   ),
@@ -293,7 +240,6 @@ class _ExtractPageState extends State<ExtractPage> {
                 ? SubmitButton(
                     userid: userid,
                     upiId: upiId,
-                    timedate: timedate,
                     refimg: widget.imported,
                   )
                 : CircularProgressIndicator(
