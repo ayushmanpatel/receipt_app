@@ -17,14 +17,14 @@ class _ExtractPageState extends State<ExtractPage> {
   bool _isloading;
   List<String> textList;
   var textRecognizer = GoogleMlKit.vision.textDetector();
-  var entityExtractor =
-      GoogleMlKit.nlp.entityExtractor(EntityExtractorOptions.ENGLISH);
-  final _languageModelManager = GoogleMlKit.nlp.entityModelManager();
+  // var entityExtractor =
+  //     GoogleMlKit.nlp.entityExtractor(EntityExtractorOptions.ENGLISH);
+  // final _languageModelManager = GoogleMlKit.nlp.entityModelManager();
 
-  Future<void> getAvailableModels() async {
-    await _languageModelManager.getAvailableModels();
-    //print('Available models: $result');
-  }
+  // Future<void> getAvailableModels() async {
+  //   await _languageModelManager.getAvailableModels();
+  //   //print('Available models: $result');
+  // }
 
   var upiId = "loading...";
   var timedate = "loading...";
@@ -34,7 +34,7 @@ class _ExtractPageState extends State<ExtractPage> {
     super.initState();
     _isloading = false;
     textList = [];
-    getAvailableModels();
+    // getAvailableModels();
     displayText();
   }
 
@@ -77,11 +77,11 @@ class _ExtractPageState extends State<ExtractPage> {
   }
 
   TextStyle textStyle = TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold);
-  @override
-  void dispose() {
-    entityExtractor.close();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   entityExtractor.close();
+  //   super.dispose();
+  // }
 
   final userid = FirebaseAuth.instance.currentUser;
 

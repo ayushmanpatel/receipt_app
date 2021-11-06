@@ -57,7 +57,6 @@ class _ReceiptStatusState extends State<ReceiptStatus> {
               }
 
               DateTime now = DateTime.now();
-
               bool isVerified = data['isVerified'];
               bool refresh = false;
               return Padding(
@@ -225,14 +224,14 @@ class _ReceiptStatusState extends State<ReceiptStatus> {
 
                                         final invoice = Invoice(
                                           schoolname: SchoolName(
-                                            name: 'PUBLIC SCHOOL',
+                                            name: 'GIET UNIVERSITY',
                                             address:
-                                                'At Bhubaneswar 770022 , Odisha',
+                                                'At Gunupur,Rayagada 765022 , Odisha',
                                             contactInfo:
-                                                'E-Mail : publicschool@bbs.edu',
+                                                'E-Mail : admin@giet.edu',
                                           ),
                                           receiptinfo: ReceiptInfo(
-                                              name: 'Ayushman Patel',
+                                              name: widget.userId.displayName,
                                               pdfname:
                                                   'Reg-0${data['docNumber']}',
                                               amount: "${data['amount']}",

@@ -12,7 +12,6 @@ import 'package:pdf/widgets.dart';
 class PdfInvoiceApi {
   static Future<File> generate(Invoice invoice) async {
     final pdf = Document();
-   
 
     pdf.addPage(MultiPage(
       build: (context) => [
@@ -113,8 +112,7 @@ class PdfInvoiceApi {
           SizedBox(height: 2 * PdfPageFormat.mm),
           buildSimpleText(title: 'Address', value: invoice.schoolname.address),
           SizedBox(height: 1 * PdfPageFormat.mm),
-          buildSimpleText(
-              title: 'Paypal', value: invoice.schoolname.contactInfo),
+          buildSimpleText(title: '', value: invoice.schoolname.contactInfo),
         ],
       );
 

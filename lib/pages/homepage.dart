@@ -5,7 +5,6 @@ import 'package:accounter/Widget/profile.dart';
 import 'package:accounter/pages/showImage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,27 +23,27 @@ class _HomePageState extends State<HomePage> {
   bool isImageLoaded = false;
   bool isCameraSelected;
   TextStyle textStyle = TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold);
-  final _languageModelManager = GoogleMlKit.nlp.entityModelManager();
+  //final _languageModelManager = GoogleMlKit.nlp.entityModelManager();
 
-  @override
-  void initState() {
-    super.initState();
-    isModelDownloaded();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   //isModelDownloaded();
+  // }
 
-  Future<void> downloadModel() async {
-    CircularProgressIndicator();
-    await _languageModelManager.downloadModel(EntityExtractorOptions.ENGLISH,
-        isWifiRequired: false);
-  }
+  // Future<void> downloadModel() async {
+  //   CircularProgressIndicator();
+  //   await _languageModelManager.downloadModel(EntityExtractorOptions.ENGLISH,
+  //       isWifiRequired: false);
+  // }
 
-  Future<void> isModelDownloaded() async {
-    var result = await _languageModelManager
-        .isModelDownloaded(EntityExtractorOptions.ENGLISH);
-    if (!result) {
-      downloadModel();
-    }
-  }
+  // Future<void> isModelDownloaded() async {
+  //   var result = await _languageModelManager
+  //       .isModelDownloaded(EntityExtractorOptions.ENGLISH);
+  //   if (!result) {
+  //     downloadModel();
+  //   }
+  // }
 
   Future getImageFromGallery() async {
     isCameraSelected = false;
@@ -91,7 +90,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[900],
-        title: Text("feePay"),
+        title: Text("FeePay"),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           Padding(

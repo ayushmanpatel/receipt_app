@@ -52,23 +52,21 @@ class _SubmitButtonState extends State<SubmitButton> {
               _downloadurl = await snapshot.ref.getDownloadURL();
             }
             var docid;
-            var amount;
-
+            var amount = "unable To Fetch";
+            print(widget.upiId);
             bool isvalid = await CheckUpiId().checkUpiId(widget.upiId);
+            print("$isvalid");
 
             var bankapi = FirebaseFirestore.instance.collection('bankapi');
             var querySnapShot =
                 await bankapi.where('id', isEqualTo: widget.upiId).get();
-            if (querySnapShot != null) {
-              for (var snapshot in querySnapShot.docs) {
-                docid = snapshot.data();
-                if (docid['debit'] != "") {
-                  amount = docid['debit'].toString();
-                } else if (docid['credit'] != "") {
-                  amount = docid['credit'].toString();
-                } else {
-                  amount = "unable to fetch".toString();
-                }
+
+            for (var snapshot in querySnapShot.docs) {
+              docid = snapshot.data();
+              if (docid['debit'] == "") {
+                amount = docid['credit'].toString();
+              } else {
+                amount = docid['debit'].toString();
               }
             }
 
